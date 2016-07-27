@@ -41,6 +41,14 @@ class LinkedList
     end 
     count
   end
+
+  def head
+    @head
+  end
+
+  def tail
+    @tail
+  end
 end
 
 list = LinkedList.new
@@ -48,5 +56,8 @@ list.append(Node.new(5))
 list.append(Node.new(7))
 list.prepend(Node.new(14))
 list.append(Node.new(34))
+
 p list
 p list.size
+puts list.head
+puts list.tail

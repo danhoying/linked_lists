@@ -186,7 +186,33 @@ class LinkedList
 
   # Removes node at given index
   def remove_at(index)
-
+    size = self.size
+    if index > size || index < 0
+      puts "Error: Index is not within list boundary!"
+      return nil
+    elsif index == size
+      self.pop
+      return nil
+    elsif index == 1
+      node = @head
+      prev = node
+      node = node.next_node
+      prev.next_node = nil
+      @head = node
+      return nil
+    else
+      node = @head
+      count = 1
+      until count == index
+        if count < index
+          prev = node
+        end
+        node = node.next_node
+        count += 1
+      end
+      prev.next_node = node.next_node
+      node.next_node = node
+    end
   end
 end
 
@@ -232,6 +258,15 @@ list.insert_at("hello", 3)
 puts list.to_s
 puts
 
+list.remove_at(99)
+list.remove_at(1)
+puts list.to_s
+list.remove_at(4)
+puts list.to_s
+list.remove_at(6)
+puts list.to_s
+puts
+
 list.pop
 p list
 list.pop
@@ -242,9 +277,6 @@ list.pop
 p list
 list.pop
 p list
-list.pop
-list.pop
-list.pop
 list.pop
 p list
 

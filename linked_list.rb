@@ -49,6 +49,16 @@ class LinkedList
   def tail
     @tail
   end
+
+  def at(index)
+    count = 1
+    node = @head
+    until count == index
+      count+= 1
+      node = node.next_node
+    end
+    node
+  end
 end
 
 list = LinkedList.new
@@ -56,8 +66,11 @@ list.append(Node.new(5))
 list.append(Node.new(7))
 list.prepend(Node.new(14))
 list.append(Node.new(34))
+list.prepend(Node.new("great"))
 
 p list
 p list.size
 puts list.head
 puts list.tail
+puts list.at(3)
+puts list.at(5)

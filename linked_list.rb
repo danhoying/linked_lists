@@ -86,6 +86,22 @@ class LinkedList
       @tail = node
     end
   end
+
+  def contains?(data)
+    if @head.nil?
+      print "List is empty!"
+      return false
+    else
+      node = @head
+      until node.value == data
+        node = node.next_node
+        if node == @tail && node.value != data
+          return false
+        end
+      end
+      return true
+    end
+  end
 end
 
 list = LinkedList.new
@@ -103,6 +119,10 @@ puts list.at(3)
 puts list.at(15)
 puts list.at(-5)
 
+puts list.contains?(5)
+puts list.contains?(34)
+puts list.contains?(30)
+
 list.pop
 p list
 list.pop
@@ -114,3 +134,5 @@ p list
 list.pop
 p list
 list.pop
+puts
+list.contains?(34)

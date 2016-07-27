@@ -61,7 +61,7 @@ class LinkedList
   def at(index)
     size = self.size
     if index > size || index < 0
-      print "Error: Index is not within list boundary!"
+      puts "Error: Index is not within list boundary!"
       return nil
     end
     count = 1
@@ -76,7 +76,7 @@ class LinkedList
   # Deletes last node from list
   def pop
     if @head.nil?
-      print "Error: Empty List, cannot delete!"
+      puts "Error: Empty List, cannot delete!"
       return nil
     elsif @head == @tail
       node = @head
@@ -99,8 +99,13 @@ class LinkedList
   # Returns true if list contains data; otherwise, returns false
   def contains?(data)
     if @head.nil?
-      print "List is empty!"
+      puts "List is empty!"
       return false
+    elsif @head == @tail
+      node = @head
+      if node.value != data
+        return false
+      end
     else
       node = @head
       until node.value == data
@@ -116,7 +121,7 @@ class LinkedList
   # Returns the index of node containing data; otherwise, returns nil 
   def find(data)
     if @head.nil?
-      print "List is empty"
+      puts "List is empty"
       return nil
     elsif @head.value == data
       return 1
@@ -130,7 +135,7 @@ class LinkedList
           return index
         end
       end
-      print "Value not found."
+      puts "Value not found."
       return nil
     end
   end
@@ -147,6 +152,34 @@ class LinkedList
       end
     end
     string
+  end
+
+  # Inserts data at given index
+  def insert_at(data, index)
+    size = self.size
+    if index == 1
+      self.prepend(Node.new(data))
+      return nil
+    elsif index == size + 1
+      self.append(Node.new(data))
+      return nil
+    elsif index > size || index < 0
+      puts "Error: Index is not within list boundary!"
+      return nil
+    else
+      node = @head
+      count = 1
+      until count == index
+        if count < index
+          prev = node
+        end
+        node = node.next_node
+        count += 1
+      end
+      new_node = Node.new(data)
+      new_node.next_node = node
+      prev.next_node = new_node
+    end
   end
 end
 
@@ -186,16 +219,27 @@ puts
 puts list.to_s
 puts
 
-list.pop
-p list
-list.pop
-p list
-list.pop
-p list
-list.pop
-p list
-list.pop
-p list
-list.pop
+list.insert_at(33, 1)
+list.insert_at(55, 7)
+list.insert_at("hello", 3)
+puts list.to_s
 puts
-list.contains?(34)
+
+list.pop
+p list
+list.pop
+p list
+list.pop
+p list
+list.pop
+p list
+list.pop
+p list
+list.pop
+list.pop
+list.pop
+list.pop
+p list
+
+puts
+puts list.contains?(34)

@@ -16,6 +16,7 @@ class LinkedList
 
   # Adds node to end of list
   def append(data)
+    data = Node.new(data)
      if @head.nil?
        @head = data
        @tail = data
@@ -27,6 +28,7 @@ class LinkedList
 
   # Adds node to start of list
   def prepend(data)
+    data = Node.new(data)
     if @head.nil?
       @head = data
       @tail = data
@@ -158,10 +160,10 @@ class LinkedList
   def insert_at(data, index)
     size = self.size
     if index == 1
-      self.prepend(Node.new(data))
+      self.prepend(data)
       return nil
     elsif index == size + 1
-      self.append(Node.new(data))
+      self.append(data)
       return nil
     elsif index > size || index < 0
       puts "Error: Index is not within list boundary!"
@@ -181,16 +183,21 @@ class LinkedList
       prev.next_node = new_node
     end
   end
+
+  # Removes node at given index
+  def remove_at(index)
+
+  end
 end
 
 # Tests
 
 list = LinkedList.new
-list.append(Node.new(5))
-list.append(Node.new(7))
-list.prepend(Node.new(14))
-list.append(Node.new(34))
-list.prepend(Node.new("great"))
+list.append(5)
+list.append(7)
+list.prepend(14)
+list.append(34)
+list.prepend("great")
 
 p list
 puts

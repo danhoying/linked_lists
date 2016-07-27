@@ -1,3 +1,5 @@
+# An implementation of linked lists in Ruby
+
 class Node
   attr_accessor :value, :next_node
   def initialize(value)
@@ -12,6 +14,7 @@ class LinkedList
     @tail = nil
   end
 
+  # Adds node to end of list
   def append(data)
      if @head.nil?
        @head = data
@@ -22,6 +25,7 @@ class LinkedList
      end
   end
 
+  # Adds node to start of list
   def prepend(data)
     if @head.nil?
       @head = data
@@ -32,6 +36,7 @@ class LinkedList
     end
   end
 
+  # Returns size of list
   def size
     count = 1
     node = @head 
@@ -42,14 +47,17 @@ class LinkedList
     count
   end
 
+  # Returns first node in list
   def head
     @head
   end
 
+  # Returns last node in list
   def tail
     @tail
   end
 
+  # Returns node at given index
   def at(index)
     size = self.size
     if index > size || index < 0
@@ -65,6 +73,7 @@ class LinkedList
     node
   end
 
+  # Deletes last node from list
   def pop
     if @head.nil?
       print "Error: Empty List, cannot delete!"
@@ -87,6 +96,7 @@ class LinkedList
     end
   end
 
+  # Returns true if list contains value; otherwise, false
   def contains?(data)
     if @head.nil?
       print "List is empty!"
@@ -104,6 +114,8 @@ class LinkedList
   end
 end
 
+# Tests
+
 list = LinkedList.new
 list.append(Node.new(5))
 list.append(Node.new(7))
@@ -112,16 +124,22 @@ list.append(Node.new(34))
 list.prepend(Node.new("great"))
 
 p list
-puts list.size
+puts
+
+puts "Size: #{list.size}"
 puts list.head
 puts list.tail
+puts
 puts list.at(3)
+puts list.at(5)
 puts list.at(15)
 puts list.at(-5)
+puts
 
 puts list.contains?(5)
 puts list.contains?(34)
 puts list.contains?(30)
+puts
 
 list.pop
 p list

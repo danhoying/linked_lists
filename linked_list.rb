@@ -51,6 +51,11 @@ class LinkedList
   end
 
   def at(index)
+    size = self.size
+    if index > size || index < 0
+      print "Error: Index is not within list boundary!"
+      return nil
+    end
     count = 1
     node = @head
     until count == index
@@ -58,6 +63,28 @@ class LinkedList
       node = node.next_node
     end
     node
+  end
+
+  def pop
+    if @head.nil?
+      print "Error: Empty List, cannot delete!"
+      return nil
+    elsif @head == @tail
+      node = @head
+      @head = nil
+      @tail = nil
+    elsif @head.next_node == @tail
+      node = @head
+      node.next_node = nil
+      @tail = @head
+    else
+      node = @head
+      until node.next_node.next_node.nil?
+        node = node.next_node
+      end
+      node.next_node = nil
+      @tail = node
+    end
   end
 end
 
@@ -69,8 +96,21 @@ list.append(Node.new(34))
 list.prepend(Node.new("great"))
 
 p list
-p list.size
+puts list.size
 puts list.head
 puts list.tail
 puts list.at(3)
-puts list.at(5)
+puts list.at(15)
+puts list.at(-5)
+
+list.pop
+p list
+list.pop
+p list
+list.pop
+p list
+list.pop
+p list
+list.pop
+p list
+list.pop

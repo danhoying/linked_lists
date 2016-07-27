@@ -96,7 +96,7 @@ class LinkedList
     end
   end
 
-  # Returns true if list contains value; otherwise, false
+  # Returns true if list contains data; otherwise, returns false
   def contains?(data)
     if @head.nil?
       print "List is empty!"
@@ -111,6 +111,42 @@ class LinkedList
       end
       return true
     end
+  end
+
+  # Returns the index of node containing data; otherwise, returns nil 
+  def find(data)
+    if @head.nil?
+      print "List is empty"
+      return nil
+    elsif @head.value == data
+      return 1
+    else
+      index = 1
+      node = @head
+      until node.next_node.nil?
+        node = node.next_node
+        index += 1
+        if node.value == data
+          return index
+        end
+      end
+      print "Value not found."
+      return nil
+    end
+  end
+
+  # Represents linked list objects in string format
+  def to_s
+    node = @head
+    string = "( #{node.value} ) -> "
+    until node.next_node.nil?
+      node = node.next_node
+      string = string + "( #{node.value} ) -> "
+      if node.next_node.nil?
+        string = string + "nil"
+      end
+    end
+    string
   end
 end
 
@@ -139,6 +175,15 @@ puts
 puts list.contains?(5)
 puts list.contains?(34)
 puts list.contains?(30)
+puts
+
+puts list.find(5)
+puts list.find("great")
+puts list.find(34)
+puts list.find(44)
+puts
+
+puts list.to_s
 puts
 
 list.pop
